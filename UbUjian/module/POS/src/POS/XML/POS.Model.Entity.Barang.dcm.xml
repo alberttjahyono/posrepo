@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+<entity name="POS\Model\Entity\Barang"  table="barang">
+    <id name="ID_BARANG" type="integer" column="ID_BARANG">
+        <generator strategy="AUTO" />
+    </id>
+    <field name="NAMA" column="NAMA" length="50" />
+    <field name="STOK" column="STOK" type="integer"/>
+       <field name="HARGA_BELI" column="HARGA_BELI" type="integer"/>
+    <field name="HARGA_JUAL" column="HARGA_JUAL" type="integer" />
+    <field name="STATUS" column="STATUS" length="50" />
+ 
+  </entity>
+</doctrine-mapping>

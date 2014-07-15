@@ -1,0 +1,54 @@
+<h1>
+	Login
+</h1>
+<?php
+$form = $this -> form;
+$form->setAttribute('action', $this->url(
+    'login/authenticate',
+    array(
+        'action' => 'authenticate',
+    )
+));
+$form -> prepare();
+echo $this->form()->openTag($form);
+?>
+<div id='formContainer'>
+	<div id='formUsername'>
+		<?php
+		echo $this -> formLabel($form -> get('username'));?><BR><?php
+		echo $this -> formElement($form -> get('username'));?><BR><?php
+		echo $this -> formElementErrors($form -> get('username'));
+		?>
+	</div>
+	<div id='formPassword'>
+		<?php
+		echo $this -> formLabel($form -> get('password'));?><BR><?php
+		echo $this -> formElement($form -> get('password'));?><BR><?php
+		echo $this -> formElementErrors($form -> get('password'));
+		?>
+	</div>
+	<BR>
+	<div id='formLoginSubmit'>
+		<?php
+		
+		echo $this -> formElement($form -> get('btnSubmit'));
+		echo $this -> formElementErrors($form -> get('btnSubmit'));
+		?>
+	</div>
+
+</div>
+<?php
+echo $this->form()->closeTag($form);
+?>
+<h3>
+<?php
+if ($this -> messages) {
+	
+	foreach ($this->messages as $message) {
+		echo $message;
+		echo "<BR>";
+	}
+
+}
+?>
+</h3>

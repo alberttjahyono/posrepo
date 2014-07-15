@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+<entity name="POS\Model\Entity\DetailTransaksi"  table="detailtransaksi">
+
+	<id name="ID_DETAIL" type="integer" column="ID_DETAIL">
+        <generator strategy="AUTO" />
+    </id>
+ 	<field name="ID_TRANSAKSI" column="ID_TRANSAKSI" type="integer"/>
+	<field name="ID_BARANG" column="ID_BARANG" type="integer"/>
+    <field name="JUMLAH" column="JUMLAH" type="integer"/>
+    <field name="HARGA" column="HARGA" type="integer"/>
+
+ 
+  </entity>
+</doctrine-mapping>

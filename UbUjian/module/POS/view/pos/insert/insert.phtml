@@ -1,0 +1,72 @@
+<h3>
+	Beli Barang Baru
+</h3>
+
+
+<?php
+$form = $this -> form;
+$form->setAttribute('action', $this->url(
+    'insert',
+    array(
+        'action' => 'insert',
+    )
+));
+$form -> prepare();
+echo $this->form()->openTag($form);
+?>
+<div id='formContainer'>
+	<div id='formNama'>
+		<?php
+			echo $this -> formLabel($form -> get('nama'));
+		?>
+		<BR>
+		<?php
+			echo $this -> formElement($form -> get('nama'));
+		?>
+		<h5 style="color:red">
+			<?php
+				echo $this -> formElementErrors($form -> get('nama'));
+			?>
+		</h5>
+	</div>
+	<div id='formJumlah'>
+		<?php
+			echo $this -> formLabel($form -> get('stok'));
+		?>
+		<BR>
+		<?php
+			echo $this -> formElement($form -> get('stok'));
+		?>
+		<h5 style="color:red">
+			<?php
+				echo $this -> formElementErrors($form -> get('stok'));
+			?>
+		</h5>	
+	</div>
+	<div id='formHarga'>
+		<?php
+			echo $this -> formLabel($form -> get('hargaBeli'));
+		?>
+		<BR>
+		<?php
+			echo $this -> formElement($form -> get('hargaBeli'));
+		?>
+		<h5 style="color:red">
+		<?php
+			echo $this -> formElementErrors($form -> get('hargaBeli'));
+		?>
+		</h5>
+	</div>
+	
+
+	<div id='formInsertSubmit'>
+		<?php
+			echo $this -> formElement($form -> get('btnSubmit'));
+			echo $this -> formElementErrors($form -> get('btnSubmit'));
+		?>
+	</div>
+
+</div>
+<?php
+echo $this->form()->closeTag($form);
+?>

@@ -1,0 +1,47 @@
+<h1> INVOICE</h1>
+
+<h4>User : <?php echo $namaUser;?></h4> 
+<h4><?php echo gmdate("Y-m-d H:i:s"); ?></h4>
+
+<br>
+<br>
+<Table border=1>
+	<tr>
+		<th style="text-align:left; width:150px;">
+			Nama Barang
+		</th>
+		<th style="text-align:left; width:75px;">
+			Harga
+		</th>
+		<th style="text-align:left; width:75px;">
+			Jumlah
+		</th>
+		<th style="text-align:left; width:75px;">
+			Total
+		</th>	
+	</tr>
+	
+<?php foreach($arrayData as $detail) : ?>
+	<tr>
+		<td style="text-align:left; width:150px;">
+			<?php echo $detail['NamaBarang']; ?> 
+		</td>
+		<td style='text-align:right; width:75px;'>
+			<?php echo $detail['HargaBarang']; ?> 
+		</td>
+		<td style='text-align:right; width:75px;'>
+			<?php echo $detail['StokBarang']; ?> 
+		</td>
+		<td style='text-align:right; width:75px;'>
+			<?php echo $detail['Subtotal'];?> 
+		</td>
+	</tr>
+<?php endforeach; ?>
+</Table>
+
+
+<h3>Grand Total : <?php echo "Rp. " . $totalAll;?></h3>
+
+<br>
+<br>
+<a href="<?php echo $this -> url('home', array('action' => 'main')); ?>">Back to Main Menu</a>

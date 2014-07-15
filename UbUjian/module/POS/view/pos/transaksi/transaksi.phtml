@@ -1,0 +1,59 @@
+<h3>
+	Beli Barang Baru
+</h3>
+
+
+<?php
+$form = $this -> form;
+$form->setAttribute('action', $this->url(
+    'transaksi',
+    array(
+        'action' => 'transaksi',
+    )
+));
+$form -> prepare();
+echo $this->form()->openTag($form);
+?>
+<div id='formContainer'>
+	<div id='formNama'>
+		<?php
+		echo $this -> formLabel($form -> get('namaBarang'));?><BR><?php
+		echo $this -> formElement($form -> get('namaBarang'));?><BR><?php
+		?>
+	</div>
+	<br>
+	<div id='formJumlah'>
+		<?php
+		echo $this -> formLabel($form -> get('stok'));?><BR><?php
+		echo $this -> formElement($form -> get('stok'));?>
+		<h5 style="color:red">
+			<?php
+				echo $this -> formElementErrors($form -> get('stok'));
+			?>
+		</h5>
+	</div>
+	<br>
+	<div id='formInsertSubmit'>
+		<?php
+		echo $this -> formElement($form -> get('btnSubmit'));
+		echo $this -> formElementErrors($form -> get('btnSubmit'));
+		?>
+	</div>
+
+</div>
+<?php
+echo $this->form()->closeTag($form);
+?>
+<br>
+
+<h4 style='color:red;'>
+<?php
+if ($this -> messages) {
+	foreach ($this->messages as $message) {
+		echo $message;
+		echo "<BR>";
+		echo "<BR>";
+	}
+}
+?>
+</h4>

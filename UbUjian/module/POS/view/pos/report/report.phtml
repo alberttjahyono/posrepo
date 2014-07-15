@@ -1,0 +1,82 @@
+<a href="<?php echo $this->url('report/excel', array('action'=>'excel'));?>">Export to Excel File</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $this->url('report/pdf', array('action'=>'pdf'));?>">Export to PDF File</a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $this->url('report/chart', array('action'=>'chart'));?>">Export to Excel with Chart</a>
+<br>
+<?php foreach($reportData as $transaksi) : ?>
+	
+<h4>
+	<?php echo 'Id Transaksi : ' . $transaksi['TransaksiData']['idTransaksi'];?><br>
+	<?php echo 'User : ' . $transaksi['TransaksiData']['user'];?><br>
+	
+	<?php 
+	
+	echo 'Tanggal : ' . date("g:i a F j, Y ", strtotime($transaksi['TransaksiData']['tglTransaksi']));?><br>
+</h4>
+<Table border=1 class='myTable'>
+	<tr>
+		<th>
+			Nama Barang
+		</th>
+		<th>
+			Harga Barang
+		</th>
+		<th>
+			Jumlah Beli
+		</th>
+		<th>
+			Total
+		</th>	
+	</tr>
+<?php foreach($transaksi['DetailTransaksi'] as $detail) : ?>
+	<tr>
+		<td>
+			<?php echo $detail['NamaBarang']; ?> 
+		</td>
+		<td>
+			<?php echo $detail['Harga']; ?> 
+		</td>
+		<td>
+			<?php echo $detail['Jumlah']; ?> 
+		</td>
+		<td>
+			<?php echo $detail['Total'];?> 
+		</td>
+	</tr>
+<?php endforeach; ?>
+	<tr>
+		<td>
+			&nbsp;&nbsp;
+		</td>
+		<td>
+			&nbsp;&nbsp;
+		</td>
+		<td>
+			Total : 
+		</td>
+		<td>
+			<?php echo $transaksi['TransaksiData']['total'];?>
+		</td>
+	</tr>
+</Table>
+<br>
+<br>
+<?php endforeach; ?>
+<br>
+
+<h4>
+<?php
+if ($this -> messages) {
+	
+	foreach ($this->messages as $message) {
+		echo $message;
+		echo "<BR>";
+	}
+
+}
+?>
+</h4>
+
+<a href="<?php echo $this -> url('home', array('action' => 'main')); ?>">Back to Main Menu</a>

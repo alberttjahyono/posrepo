@@ -1,0 +1,135 @@
+<h1>
+	Welcome <?php echo $namaUser;?>
+</h1>
+
+
+<BR>
+<?php
+$form = $this -> form;
+$form->setAttribute('action', $this->url(
+    '',
+    array(
+        'action' => 'main',
+    )
+));	
+$form -> prepare();
+echo $this->form()->openTag($form);
+?>
+	<div id='formId'>
+		<?php
+		echo 'Search By ' . $this -> formLabel($form -> get('nama')) . ' : ';?>&nbsp;&nbsp;<?php
+		echo $this -> formElement($form -> get('nama'));?>&nbsp;&nbsp;&nbsp;&nbsp;<?php
+		echo $this -> formElementErrors($form -> get('nama'));
+		
+		echo $this -> formElement($form -> get('btnSubmit'));
+		echo $this -> formElementErrors($form -> get('btnSubmit'));
+		?>
+	</div>
+
+<?php
+echo $this->form()->closeTag($form);
+?>	
+<BR>
+	
+	
+
+	
+<Table border=1 class='myTable'>
+	<tr>
+		<th>
+			Id Barang
+		</th>
+		<th>
+			Nama Barang
+		</th>
+		<th>
+			Stok Barang
+		</th>
+		<th>
+			Harga Beli
+		</th>
+		<th>
+			Harga Jual
+		</th>
+		<th>
+			Status
+		</th>
+		<th>
+			Edit
+		</th>
+		<th>
+			Change Status
+		</th>
+	</tr>
+
+<?php foreach($paginator as $item) : ?>
+	<tr>
+		<td style='text-align:center;'>
+			<?php echo $item->getIdBarang(); ?> 
+		</td>
+		<td style='text-align:left;'>
+			<?php echo $item->getNama(); ?> 
+		</td>
+		<td style='text-align:right;'>
+			<?php echo $item->getStok(); ?> 
+		</td>
+		<td style='text-align:right;'>
+			<?php echo $item->getHargaBeli(); ?> 
+		</td>
+		<td style='text-align:right;'>
+			<?php echo $item->getHargaJual(); ?> 
+		</td>
+		<td style='text-align:center;'>
+			<?php echo $item->getStatus(); ?> 
+		</td>
+		<td>
+			<a href="<?php echo $this -> url('edit', array('action' => 'edit','id'=>$item->getIdBarang())); ?>">Edit</a>
+		</td>
+		<td>
+			<a href="<?php echo $this -> url('delete', array('action' => 'delete','id'=>$item->getIdBarang())); ?>" 
+				<?php 
+				if($item->getStatus() == "Launch"){
+				?>
+				onclick="if (confirm('Apakah anda yakin ingin Standby Barang ini?')) { return true; } return false;">
+				<?php
+					echo "Set to Standby";
+				}
+				else{
+				?>
+				onclick="if (confirm('Apakah anda yakin ingin Launch Barang ini?')) { return true; } return false;">
+				<?php
+					echo "Set to Launch";
+				}			
+				?>			
+							
+			</a>
+		</td>
+	</tr>
+<?php endforeach; ?>
+</Table>
+
+<br>
+<?= ( count($paginator) > 0 ) ? $this->paginationControl($paginator, 'Sliding', 'pager.phtml', array('lang'=>$lang)) : ""; ?>
+
+<h4>
+<?php
+if ($this -> messages) {
+	
+	foreach ($this->messages as $message) {
+		echo $message;
+		echo "<BR>";
+	}
+
+}
+?>
+</h4>
+
+
+
+<a href="<?php echo $this -> url('login/logout', array('action' => 'logout')); ?>">Logout</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $this -> url('insert', array('action' => 'insert')); ?>">Buy New Item</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $this -> url('transaksi', array('action' => 'transaksi')); ?>">Transaksi Pembelian</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<?php echo $this -> url('report', array('action' => 'report')); ?>">View History Transaksi</a>

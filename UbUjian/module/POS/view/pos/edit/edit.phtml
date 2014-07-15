@@ -1,0 +1,103 @@
+<h3>
+	Update Barang
+</h3>
+
+
+<?php
+$form = $this -> form;
+$form->setAttribute('action', $this->url(
+    'edit',
+    array(
+        'action' => 'edit',
+        'id' => $this->myId,
+    )
+));
+
+$form -> prepare();
+
+echo $this -> form() -> openTag($form);
+?>
+<div id='formContainer'>
+	<div id='formNama'>
+		<?php
+			echo $this -> formLabel($form -> get('nama'));
+		?>
+		<BR>
+		<?php
+			echo $this -> formElement($form -> get('nama'));
+		?>
+		<h5 style="color:red">
+			<?php
+				echo $this -> formElementErrors($form -> get('nama'));
+			?>
+		</h5>
+	</div>
+	<div id='formStok'>
+		<?php
+			echo $this -> formElement($form -> get('stok'));
+		?>
+		<?php
+			echo $this -> formElementErrors($form -> get('stok'));
+		?>
+	</div>
+	<div id='formBeli'>
+		<?php
+			echo $this -> formLabel($form -> get('hargaBeli'));
+		?>
+		<BR>
+		<?php
+			echo $this -> formElement($form -> get('hargaBeli'));
+		?>
+		<h5 style="color:red">
+			<?php
+				echo $this -> formElementErrors($form -> get('hargaBeli'));
+			?>
+		</h5>
+	</div>
+	<div id='formJual'>
+		<?php
+			echo $this -> formLabel($form -> get('hargaJual'));
+		?>
+		<BR>
+		<?php
+			echo $this -> formElement($form -> get('hargaJual'));
+		?>
+		<h5 style="color:red">
+			<?php
+				echo $this -> formElementErrors($form -> get('hargaJual'));
+			?>
+		</h5>
+	</div>
+	
+	<div id='formStatus'>
+		<?php
+			echo $this -> formElement($form -> get('status'));
+		?>
+		<?php
+			echo $this -> formElementErrors($form -> get('status'));
+		?>
+	</div>
+	<br>
+	<div id='formEditSubmit'>
+		<?php
+			echo $this -> formElement($form -> get('btnSubmit'));
+			echo $this -> formElementErrors($form -> get('btnSubmit'));
+		?>
+	</div>
+
+</div>
+<?php
+echo $this -> form() -> closeTag($form);
+?>
+<h4 style='color:red;'>
+<?php
+if ($this -> messages) {
+	foreach ($this->messages as $message) {
+		echo $message;
+		echo "<BR>";
+		echo "<BR>";
+	}
+
+}
+?>
+</h4>

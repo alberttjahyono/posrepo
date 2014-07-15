@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+<entity name="POS\Model\Entity\Transaksi"  table="transaksi">
+	
+    <id name="ID_TRANSAKSI" type="integer" column="ID_TRANSAKSI">
+        <generator strategy="AUTO" />
+    </id>
+    <field name="USER" column="USER" length="50" />
+    <field name="TANGGAL" column="TGLTRANSAKSI" type="text"/>
+    <field name="TOTAL" column="TOTAL" type="integer"/>
+  </entity>
+</doctrine-mapping>

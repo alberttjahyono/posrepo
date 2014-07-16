@@ -12,7 +12,7 @@ use Zend\View\Model\ViewModel;
 class DeleteController extends AbstractActionController {
 
 	public function deleteAction() {
-		$namaUser = $this->AuthPlugin()->getLoginData();
+		$namaUser = $this->authPlugin()->getLoginData();
 		
 		if (($this -> params('id') != 0)) {
 			$myId = $this -> params('id');

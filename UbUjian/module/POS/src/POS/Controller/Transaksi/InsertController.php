@@ -13,7 +13,7 @@ use Zend\View\Model\ViewModel;
 
 class InsertController extends AbstractActionController {
 	public function insertAction() {
-		$namaUser = $this->AuthPlugin()->getLoginData();
+		$namaUser = $this->authPlugin()->getLoginData();
 		$form = new InsertBarang();
 		
 		$redirect = 'home';
@@ -45,17 +45,18 @@ class InsertController extends AbstractActionController {
 				
 				$transaksi = new Transaksi();
 				$transaksi -> setUser($namaUser);
+				$transaksi -> setTanggal(date('Y-m-d H:i:s'));
 				$transaksi -> setTotal($total);
 				$objectManager -> persist($transaksi);
 				$objectManager -> flush();
 				$transaksiID = $transaksi->getIdTransaksi();
 				
-				$Dtransaksi = new DetailTransaksi();
-				$Dtransaksi -> setIdTransaksi($transaksiID);
-				$Dtransaksi -> setIdBarang($barangID);
-				$Dtransaksi -> setJumlah($request -> getPost('stok'));
-				$Dtransaksi -> setHarga($request -> getPost('hargaBeli'));
-				$objectManager -> persist($Dtransaksi);
+				$dTransaksi = new DetailTransaksi();
+				$dTransaksi -> setIdTransaksi($transaksiID);
+				$dTransaksi -> setIdBarang($barangID);
+				$dTransaksi -> setJumlah($request -> getPost('stok'));
+				$dTransaksi -> setHarga($request -> getPost('hargaBeli'));
+				$objectManager -> persist($dTransaksi);
 				$objectManager -> flush();
 				
 				$this -> flashmessenger() -> addMessage("Barang sukses dibeli");

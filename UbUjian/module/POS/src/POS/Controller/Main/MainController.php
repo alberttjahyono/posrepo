@@ -13,17 +13,10 @@ use Zend\View\Model\ViewModel;
 
 class MainController extends AbstractActionController {
 
-     
     public function mainAction(){
-   		$namaUser = $this->AuthPlugin()->getLoginData();
-		
-		
-		$matches = $this->getEvent()->getRouteMatch();
-		$page = $matches->getParam('page', 1);
-
+   		$namaUser = $this->authPlugin()->getLoginData();
+			
 		$objectManager = $this -> getServiceLocator() -> get('Doctrine\ORM\EntityManager');
-
-		$form = new Search();
         $request = $this->getRequest();
         
         if ($request->isPost()){
@@ -31,25 +24,23 @@ class MainController extends AbstractActionController {
 				->select('u')
 				->from('POS\Model\Entity\Barang', 'u')
 				->where('u.NAMA like :input')->setParameter('input', '%'.$request->getPost("nama").'%')
-				->orderBy('u.NAMA', 'ASC');
-				
-			$query = $queryBuilder->getQuery();
-			$barang = $query->getResult();
+				->orderBy('u.ID_BARANG', 'ASC');			
         }else{
         	$queryBuilder = $objectManager->createQueryBuilder()
 				->select('u')
 				->from('POS\Model\Entity\Barang' , 'u')
 				->orderBy('u.ID_BARANG', 'ASC');
-			$query = $queryBuilder->getQuery();
-			$barang = $query->getResult();
         }   
-		$collection = new ArrayCollection($barang);
-		$paginator = new Paginator(new Collection($collection));
+        $query = $queryBuilder->getQuery();
+		$barang = $query->getResult();
 
+        $matches = $this->getEvent()->getRouteMatch();
+		$page = $matches->getParam('page', 1);
+		$paginator = new Paginator(new Collection(new ArrayCollection($barang)));
 		$paginator->setCurrentPageNumber($page);
 		$paginator->setItemCountPerPage(10);
 
-		return array('paginator'=>$paginator,'lang'=>$matches->getParam('lang','en'),'messages'=>$this -> flashmessenger(),'form'=>$form,'namaUser'=>$namaUser);
+		return array('paginator'=>$paginator,'lang'=>$matches->getParam('lang','en'),'messages'=>$this -> flashmessenger(),'form'=>new Search(),'namaUser'=>$namaUser);
     }
 }
 ?>

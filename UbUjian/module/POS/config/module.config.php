@@ -176,7 +176,7 @@ return array(
     ),
     'controller_plugins' => array(
         'invokables' => array(
-            'AuthPlugin' => 'POS\Controller\Plugin\AuthPlugin',
+            'authPlugin' => 'POS\Controller\Plugin\authPlugin',
         )
     ),
     'template_map' => array(

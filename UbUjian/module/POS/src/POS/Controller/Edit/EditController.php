@@ -12,7 +12,7 @@ use Zend\View\Model\ViewModel;
 class EditController extends AbstractActionController {
 
 	public function editAction() {
-		$namaUser = $this->AuthPlugin()->getLoginData();
+		$namaUser = $this->authPlugin()->getLoginData();
 		$form = new UpdateBarang();
 		
 		$objectManager = $this -> getServiceLocator() -> get('Doctrine\ORM\EntityManager');

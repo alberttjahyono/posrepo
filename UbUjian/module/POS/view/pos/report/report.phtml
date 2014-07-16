@@ -8,12 +8,12 @@
 <?php foreach($reportData as $transaksi) : ?>
 	
 <h4>
-	<?php echo 'Id Transaksi : ' . $transaksi['TransaksiData']['idTransaksi'];?><br>
-	<?php echo 'User : ' . $transaksi['TransaksiData']['user'];?><br>
+	<?php echo 'Id Transaksi : ' . $transaksi['transaksiData']['idTransaksi'];?><br>
+	<?php echo 'User : ' . $transaksi['transaksiData']['user'];?><br>
 	
 	<?php 
 	
-	echo 'Tanggal : ' . date("g:i a F j, Y ", strtotime($transaksi['TransaksiData']['tglTransaksi']));?><br>
+	echo 'Tanggal : ' . date("g:i a F j, Y ", strtotime($transaksi['transaksiData']['tglTransaksi']));?><br>
 </h4>
 <Table border=1 class='myTable'>
 	<tr>
@@ -30,19 +30,19 @@
 			Total
 		</th>	
 	</tr>
-<?php foreach($transaksi['DetailTransaksi'] as $detail) : ?>
+<?php foreach($transaksi['detailTransaksi'] as $detail) : ?>
 	<tr>
 		<td>
-			<?php echo $detail['NamaBarang']; ?> 
+			<?php echo $detail['namaBarang']; ?> 
 		</td>
 		<td>
-			<?php echo $detail['Harga']; ?> 
+			<?php echo $detail['harga']; ?> 
 		</td>
 		<td>
-			<?php echo $detail['Jumlah']; ?> 
+			<?php echo $detail['jumlah']; ?> 
 		</td>
 		<td>
-			<?php echo $detail['Total'];?> 
+			<?php echo $detail['total'];?> 
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -57,7 +57,7 @@
 			Total : 
 		</td>
 		<td>
-			<?php echo $transaksi['TransaksiData']['total'];?>
+			<?php echo $transaksi['transaksiData']['total'];?>
 		</td>
 	</tr>
 </Table>

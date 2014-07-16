@@ -8,7 +8,7 @@
     <id name="ID_TRANSAKSI" type="integer" column="ID_TRANSAKSI">
         <generator strategy="AUTO" />
     </id>
-    <field name="USER" column="USER" length="50" />
+    <field name="USER" column="NAMAUSER" length="50" />
     <field name="TANGGAL" column="TGLTRANSAKSI" type="text"/>
     <field name="TOTAL" column="TOTAL" type="integer"/>
   </entity>

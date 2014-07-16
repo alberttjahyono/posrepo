@@ -27,7 +27,7 @@ class Transaksi {
         return $this->TANGGAL;
     }
 	public function setTanggal($TANGGAL) {
-        $this->Tanggal = $TANGGAL;
+        $this->TANGGAL = $TANGGAL;
         return $this;
     }
 	public function getTotal() {

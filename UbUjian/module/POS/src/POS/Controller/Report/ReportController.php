@@ -13,7 +13,7 @@ use Zend\Session\Container;
 class ReportController extends AbstractActionController {
 
 	public function reportAction() {		
-		$namaUser = $this->AuthPlugin()->getLoginData();
+		$namaUser = $this->authPlugin()->getLoginData();
 		$objectManager = $this -> getServiceLocator() -> get('Doctrine\ORM\EntityManager');
 		$Transaksi = new Transaksi();
 		$queryBuilder = $objectManager -> createQueryBuilder()
@@ -34,10 +34,10 @@ class ReportController extends AbstractActionController {
 				foreach ($Barang as $myBarang) {
 					$namaBarang = $myBarang -> getNama();
 					array_push($arrayDetail, array(
-						'NamaBarang' => $namaBarang, 
-						'Jumlah' => $dTransaksi -> getJumlah(), 
-						'Harga' => $dTransaksi -> getHarga(), 
-						'Total' => $dTransaksi -> getJumlah() * $dTransaksi -> getHarga()
+						'namaBarang' => $namaBarang, 
+						'jumlah' => $dTransaksi -> getJumlah(), 
+						'harga' => $dTransaksi -> getHarga(), 
+						'total' => $dTransaksi -> getJumlah() * $dTransaksi -> getHarga()
 					));
 				}
 			}
@@ -47,7 +47,7 @@ class ReportController extends AbstractActionController {
 				'user'=>$myTransaksi->getUser(),
 				'total'=>$myTransaksi->getTotal()
 			);
-			array_push($reportData, array('TransaksiData' => $dataTransaksi, 'DetailTransaksi' => $arrayDetail));
+			array_push($reportData, array('transaksiData' => $dataTransaksi, 'detailTransaksi' => $arrayDetail));
 		}
 		$reportSession = new Container('report');
 		$reportSession->reportData = $reportData;
@@ -95,14 +95,14 @@ class ReportController extends AbstractActionController {
 		foreach($reportData as $row => $columns) {
 			$columnId = 'A';
 			
-			foreach($columns['TransaksiData'] as $column => $data) {
+			foreach($columns['transaksiData'] as $column => $data) {
 		        $worksheet->setCellValue($columnId.($rowID), $data);
 				$columnId++;
 		    }
 		    
-			foreach($columns['DetailTransaksi'] as $column => $data) {
+			foreach($columns['detailTransaksi'] as $column => $data) {
 				$myColumn = $columnId;
-				$worksheet->setCellValue($myColumn.($rowID), $reportData[$row]['TransaksiData']['idTransaksi']);
+				$worksheet->setCellValue($myColumn.($rowID), $reportData[$row]['transaksiData']['idTransaksi']);
 				$myColumn++;
 				foreach($data as $detail => $dataDetail) {
 			        $worksheet->setCellValue($myColumn.($rowID), $dataDetail);
@@ -154,7 +154,6 @@ class ReportController extends AbstractActionController {
 		return $this->redirect()->toRoute('report');
 	}
 	public function excelAction() {
-		
 		$reportSession = new Container('report');
 		$reportData = $reportSession->reportData;
 		define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
@@ -192,14 +191,14 @@ class ReportController extends AbstractActionController {
 		foreach($reportData as $row => $columns) {
 			$columnId = 'A';
 			
-			foreach($columns['TransaksiData'] as $column => $data) {
+			foreach($columns['transaksiData'] as $column => $data) {
 		        $worksheet->setCellValue($columnId.($rowID), $data);
 				$columnId++;
 		    }
 		    
-			foreach($columns['DetailTransaksi'] as $column => $data) {
+			foreach($columns['detailTransaksi'] as $column => $data) {
 				$myColumn = $columnId;
-				$worksheet->setCellValue($myColumn.($rowID), $reportData[$row]['TransaksiData']['idTransaksi']);
+				$worksheet->setCellValue($myColumn.($rowID), $reportData[$row]['transaksiData']['idTransaksi']);
 				$myColumn++;
 				foreach($data as $detail => $dataDetail) {
 			        $worksheet->setCellValue($myColumn.($rowID), $dataDetail);
@@ -262,7 +261,7 @@ class ReportController extends AbstractActionController {
 		$chartArray = array();
 		foreach($reportData as $row => $columns) {
 			$columnId = 'A';			
-			foreach($columns['TransaksiData'] as $column => $data) {
+			foreach($columns['transaksiData'] as $column => $data) {
 		        $worksheet->setCellValue($columnId.($rowID), $data);
 				$columnId++;
 		    }
@@ -299,7 +298,7 @@ class ReportController extends AbstractActionController {
 			$yAxisLabel		// yAxisLabel
 		);
 		$chart->setTopLeftPosition('F1');
-		$chart->setBottomRightPosition('Q'.($rowID+2));
+		$chart->setBottomRightPosition('Q'.($rowID+10));
 		$objWorksheet =  $objPHPExcel->getActiveSheet();
 		//	Add the chart to the worksheet
 		$objWorksheet->addChart($chart);
@@ -325,7 +324,7 @@ class ReportController extends AbstractActionController {
 		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 		header ('Pragma: public'); // HTTP/1.0
 		
-		$objWriter =\ PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+		$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 		$objWriter->setIncludeCharts(TRUE);
 		$objWriter->save('php://output');
 

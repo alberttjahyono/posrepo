@@ -16,24 +16,22 @@ use Zend\Session\Container;
 class TransaksiController extends AbstractActionController {
 
 	public function transaksiAction() {
+		$namaUser = $this->authPlugin()->getLoginData();
 		$transactionSession = new Container('transaksi');
-		$namaUser = $this->AuthPlugin()->getLoginData();
 		$objectManager = $this -> getServiceLocator() -> get('Doctrine\ORM\EntityManager');
 		$request = $this -> getRequest();
 		if ($request -> isPost()) {
-			
 			$myTransaction = $transactionSession->transaksi;		
-			$total = 0;
-				
+			$total = 0;	
 			foreach($myTransaction as $allData){
 				$total += $allData['Subtotal'];
 			}
 			$form = new formTransaksi();
 			$formNama = $form -> get('namaBarang');
-			$allId = $transactionSession->IdBarang;
-			$allNama = $transactionSession->NamaBarang;
-			$allOption = $transactionSession->OptionNama;
-			$allHarga = $transactionSession->HargaBarang;
+			$allId = $transactionSession->idBarang;
+			$allNama = $transactionSession->namaBarang;
+			$allOption = $transactionSession->optionNama;
+			$allHarga = $transactionSession->hargaBarang;
 			$formNama -> setValueOptions($allOption);
     		$formValidator = new TransaksiValidator();
 			{
@@ -47,11 +45,11 @@ class TransaksiController extends AbstractActionController {
 			else{
 				$bolean = false;
 	        	for ($i=0; $i <count($myTransaction) ; $i++) { 
-					if ($myTransaction[$i]['NamaBarang'] == $allNama[$request -> getPost('namaBarang')]){
+					if ($myTransaction[$i]['namaBarang'] == $allNama[$request -> getPost('namaBarang')]){
 						
 						if($bolean==false){
-							$myTransaction[$i]['StokBarang'] += $request -> getPost('stok');
-							$myTransaction[$i]['Subtotal'] += $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')];
+							$myTransaction[$i]['stokBarang'] += $request -> getPost('stok');
+							$myTransaction[$i]['subtotal'] += $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')];
 							$bolean=true;
 						}
 					}
@@ -59,11 +57,11 @@ class TransaksiController extends AbstractActionController {
 			
 				if ($bolean==false){
 					array_push($myTransaction, array(
-						'IdBarang' => $allId[$request -> getPost('namaBarang')],
-						'NamaBarang' => $allNama[$request -> getPost('namaBarang')], 
-						'StokBarang' => $request -> getPost('stok'), 
-						'HargaBarang' => $allHarga[$request -> getPost('namaBarang')],
-						'Subtotal'  => $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')]
+						'idBarang' => $allId[$request -> getPost('namaBarang')],
+						'namaBarang' => $allNama[$request -> getPost('namaBarang')], 
+						'stokBarang' => $request -> getPost('stok'), 
+						'hargaBarang' => $allHarga[$request -> getPost('namaBarang')],
+						'subtotal'  => $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')]
 					));
 				}
 				
@@ -72,7 +70,7 @@ class TransaksiController extends AbstractActionController {
 				$total = 0;
 				
 				foreach($myTransaction as $allData){
-					$total += $allData['Subtotal'];
+					$total += $allData['subtotal'];
 				}
 				$myTransaction = $transactionSession->myTransaction;
 				return $this->redirect()->toRoute('transaksi', array(
@@ -101,10 +99,10 @@ class TransaksiController extends AbstractActionController {
 				array_push($allHarga, $barang -> getHargaBeli() );
 			}
 			
-			$transactionSession->OptionNama=$allNama;
-			$transactionSession->NamaBarang=$allNamaText;
-			$transactionSession->IdBarang=$allId;
-			$transactionSession->HargaBarang=$allHarga;
+			$transactionSession->optionNama=$allNama;
+			$transactionSession->namaBarang=$allNamaText;
+			$transactionSession->idBarang=$allId;
+			$transactionSession->hargaBarang=$allHarga;
 			$transactionSession->transaksi=array();
 			$myTransaction =$transactionSession->transaksi;
 			$formNama -> setValueOptions($allNama);
@@ -116,15 +114,15 @@ class TransaksiController extends AbstractActionController {
 
 	public function addAction() {
 		$transactionSession = new Container('transaksi');
-		$namaUser = $this->AuthPlugin()->getLoginData();
+		$namaUser = $this->authPlugin()->getLoginData();
 		$objectManager = $this -> getServiceLocator() -> get('Doctrine\ORM\EntityManager');
 		
 		$form = new formTransaksi();
 		$formNama = $form -> get('namaBarang');
-		$allId = $transactionSession->IdBarang;
-		$allNama = $transactionSession->NamaBarang;
-		$allOption = $transactionSession->OptionNama;
-		$allHarga = $transactionSession->HargaBarang;
+		$allId = $transactionSession->idBarang;
+		$allNama = $transactionSession->namaBarang;
+		$allOption = $transactionSession->optionNama;
+		$allHarga = $transactionSession->hargaBarang;
 		$formNama -> setValueOptions($allOption);
 		
 		$request = $this -> getRequest();
@@ -132,7 +130,7 @@ class TransaksiController extends AbstractActionController {
 		$total = 0;
 			
 		foreach($myTransaction as $allData){
-			$total += $allData['Subtotal'];
+			$total += $allData['subtotal'];
 		}
 		
 		if ($request -> isPost()) {
@@ -150,10 +148,10 @@ class TransaksiController extends AbstractActionController {
 				else{
 					$bolean = false;
 		        	for ($i=0; $i<count($myTransaction) ; $i++) { 
-						if ($myTransaction[$i]['NamaBarang'] == $allNama[$request -> getPost('namaBarang')]){
+						if ($myTransaction[$i]['namaBarang'] == $allNama[$request -> getPost('namaBarang')]){
 							if($bolean==false){
-								$myTransaction[$i]['StokBarang'] += $request -> getPost('stok');
-								$myTransaction[$i]['Subtotal'] += $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')];
+								$myTransaction[$i]['stokBarang'] += $request -> getPost('stok');
+								$myTransaction[$i]['subtotal'] += $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')];
 								$bolean=true;
 							}
 						}
@@ -161,11 +159,11 @@ class TransaksiController extends AbstractActionController {
 				
 					if ($bolean==false){
 						array_push($myTransaction, array(
-							'IdBarang' => $allId[$request -> getPost('namaBarang')],
-							'NamaBarang' => $allNama[$request -> getPost('namaBarang')], 
-							'StokBarang' => $request -> getPost('stok'), 
-							'HargaBarang' => $allHarga[$request -> getPost('namaBarang')],
-							'Subtotal'  => $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')]
+							'idBarang' => $allId[$request -> getPost('namaBarang')],
+							'namaBarang' => $allNama[$request -> getPost('namaBarang')], 
+							'stokBarang' => $request -> getPost('stok'), 
+							'hargaBarang' => $allHarga[$request -> getPost('namaBarang')],
+							'subtotal'  => $request -> getPost('stok') * $allHarga[$request -> getPost('namaBarang')]
 						));
 					}
 					$transactionSession->transaksi=$myTransaction ;	
@@ -173,21 +171,21 @@ class TransaksiController extends AbstractActionController {
 					$total = 0;
 					
 					foreach($myTransaction as $allData){
-						$total += $allData['Subtotal'];
+						$total += $allData['subtotal'];
 					}
 				}
         	}
 			else{
 				$myTransaction=$transactionSession->transaksi;	
 				foreach($myTransaction as $subKey => $subArray){
-			          if($subArray['IdBarang'] == $request->getPost("idDelete")){
+			          if($subArray['idBarang'] == $request->getPost("idDelete")){
 			               unset($myTransaction[$subKey]);
 			          }
 			     }
 				$total = 0;
 				$newArrayTransaction = array_values($myTransaction);
 				foreach($myTransaction as $allData){
-					$total += $allData['Subtotal'];
+					$total += $allData['subtotal'];
 				}
 				$transactionSession->transaksi=$newArrayTransaction;
 				if(count($myTransaction)==0){
@@ -203,17 +201,18 @@ class TransaksiController extends AbstractActionController {
 
 	public function beliAction() {
 		$transactionSession = new Container('transaksi');
-		$namaUser = $this->AuthPlugin()->getLoginData();
+		$namaUser = $this->authPlugin()->getLoginData();
 		$this->layout('layout/blank');	
 		$redirect = 'beli';
 		$myTransaction = $transactionSession->transaksi;
 		$total = 0;
 		foreach($myTransaction as $allData){
-				$total += $allData['Subtotal'];
+				$total += $allData['subtotal'];
 		}
 		$transaksi = new objekTransaksi();
 		$transaksi -> setUser($namaUser);
 		$transaksi -> setTotal($total);
+		$transaksi -> setTanggal(date('Y-m-d H:i:s'));
 		$objectManager = $this -> getServiceLocator() -> get('Doctrine\ORM\EntityManager');
 		
 		$objectManager -> persist($transaksi);
@@ -227,9 +226,9 @@ class TransaksiController extends AbstractActionController {
 			$newBarang = $barangRepository -> findBy(array('ID_BARANG' => $myTransaction[$i]['IdBarang']));
 			
 			foreach ($newBarang as $item) {
-				$barang -> setIdBarang($myTransaction[$i]['IdBarang']);
-				$barang -> setNama($myTransaction[$i]['NamaBarang']);
-				$barang -> setStok(($item->getStok() + $myTransaction[$i]['StokBarang']));
+				$barang -> setIdBarang($myTransaction[$i]['idBarang']);
+				$barang -> setNama($myTransaction[$i]['namaBarang']);
+				$barang -> setStok(($item->getStok() + $myTransaction[$i]['stokBarang']));
 				$barang -> setHargaBeli($item->getHargaBeli());
 				$barang -> setHargaJual($item->getHargaJual());
 				$barang -> setStatus($item->getStatus());
@@ -237,12 +236,12 @@ class TransaksiController extends AbstractActionController {
 				$objectManager -> flush();
 			}
 
-			$Dtransaksi = new objekDetailTransaksi();
-			$Dtransaksi -> setIdTransaksi($transaksiID);
-			$Dtransaksi -> setIdBarang($myTransaction[$i]['IdBarang']);
-			$Dtransaksi -> setJumlah($myTransaction[$i]['StokBarang']);
-			$Dtransaksi -> setHarga($myTransaction[$i]['HargaBarang']);
-			$objectManager -> persist($Dtransaksi);
+			$dTransaksi = new objekDetailTransaksi();
+			$dTransaksi -> setIdTransaksi($transaksiID);
+			$dTransaksi -> setIdBarang($myTransaction[$i]['idBarang']);
+			$dTransaksi -> setJumlah($myTransaction[$i]['stokBarang']);
+			$dTransaksi -> setHarga($myTransaction[$i]['hargaBarang']);
+			$objectManager -> persist($dTransaksi);
 			$objectManager -> flush();
 			
 			

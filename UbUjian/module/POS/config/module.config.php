@@ -174,6 +174,11 @@ return array(
             'POS' => __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'formelementerrors' => 'POS\Helper\FormErrorHelper'
+        ),
+    ),
     'controller_plugins' => array(
         'invokables' => array(
             'authPlugin' => 'POS\Controller\Plugin\authPlugin',

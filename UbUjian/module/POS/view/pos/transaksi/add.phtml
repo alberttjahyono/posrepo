@@ -45,7 +45,7 @@ echo $this->form()->closeTag($form);
 ?>
 <br>
 <br>
-<Table border=1 class='myTable'>
+<Table class='table table-striped'>
 	<tr>
 		<th>
 			Nama Barang
@@ -81,7 +81,7 @@ echo $this->form()->closeTag($form);
 		<td style="width: 75px;">
 			<form method="post" action="">
 			<input type="hidden" name="idDelete" value="<?php echo $detail['idBarang']; ?>"/>
-			<input type="submit" name="deleteBtn" onclick="if (confirm('Apakah anda yakin ingin cancel Barang ini?')) { return true; } return false;" value="Cancel"/>
+			<input class='btn btn-default' type="submit" name="deleteBtn" onclick="if (confirm('Apakah anda yakin ingin cancel Barang ini?')) { return true; } return false;" value="Cancel"/>
 			</form>
 		</td>
 	</tr>

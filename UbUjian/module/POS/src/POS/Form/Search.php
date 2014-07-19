@@ -17,7 +17,8 @@ class Search extends Form
             'name' => 'nama', 
             'type' => 'Zend\Form\Element\Text', 
             'attributes' => array( 
-                'placeholder' => 'Masukkan barang'
+                'class' => 'form-control',
+                'placeholder' => 'searchNama'
             ), 
             'options' => array( 
                 'label' => 'Nama Barang', 
@@ -29,6 +30,8 @@ class Search extends Form
             'name' => 'btnSubmit',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(
+                'placeholder' => 'searchSubmit',
+                'class' => 'btn btn-default',
                 'value' => 'search'
             ),
         ));

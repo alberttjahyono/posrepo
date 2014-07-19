@@ -17,13 +17,13 @@ echo $this->form()->openTag($form);
 ?>
 	<div id='formId'>
 		<?php
-		echo 'Search By ' . $this -> formLabel($form -> get('nama')) . ' : ';?>&nbsp;&nbsp;<?php
-		echo $this -> formElement($form -> get('nama'));?>&nbsp;&nbsp;&nbsp;&nbsp;<?php
-		echo $this -> formElementErrors($form -> get('nama'));
-		
-		echo $this -> formElement($form -> get('btnSubmit'));
-		echo $this -> formElementErrors($form -> get('btnSubmit'));
-		?>
+		echo 'Search By ' . $this -> formLabel($form -> get('nama')) . ' : ';?>&nbsp;&nbsp;
+		  <div class="searchNama">
+		    <?php echo $this -> formElement($form -> get('nama'));?>
+		  </div>
+		  <div class="searchSubmit">
+		    <?php echo $this -> formElement($form -> get('btnSubmit'));?>
+		  </div>
 	</div>
 
 <?php
@@ -34,7 +34,7 @@ echo $this->form()->closeTag($form);
 	
 
 	
-<Table border=1 class='myTable'>
+<Table class='table table-striped' >
 	<tr>
 		<th>
 			Id Barang

@@ -18,11 +18,6 @@ class LoginController extends AbstractActionController {
 		}
     	$form = new Login();
 		$request = $this -> getRequest();
-		return array('form' => $form, 'messages' => $this -> flashmessenger() -> getMessages());
-    }
-	public function authenticateAction(){
-		$form = new Login();
-		$request = $this -> getRequest();
 		if ($request -> isPost()) {
 			$formValidator = new LoginValidator();
 			{
@@ -37,27 +32,21 @@ class LoginController extends AbstractActionController {
 		        $result = $auth->authenticate();  
 				
 				if ($result->isValid()) {
-                    $redirect = 'home';
+                    return $this->redirect()->toRoute('home');
                 }
 				else{
 					$this -> flashmessenger() -> addMessage("Id/Password Salah");
+					return $this->redirect()->toRoute('login');
 				}
-				
 	        } 
-			else{
-				$this -> flashmessenger() -> addMessage("Semua Field harus terisi");
-				$redirect = 'login';
-			}
 		}
+		return array('form' => $form, 'messages' => $this -> flashmessenger() -> getMessages());
+    }
 
-		return $this->redirect()->toRoute($redirect);
-	}
 	    public function logoutAction()
     {
         $auth = $this->getServiceLocator()->get('doctrine.authenticationservice.orm_default');
         $auth->clearIdentity();
-         
-        $this->flashmessenger()->addMessage("Good Bye");
         return $this->redirect()->toRoute('login');
     }
 }

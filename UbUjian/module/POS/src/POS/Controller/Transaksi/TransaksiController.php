@@ -223,7 +223,7 @@ class TransaksiController extends AbstractActionController {
 			
 			$barang = new objekBarang();
 			$barangRepository = $objectManager -> getRepository('POS\Model\Entity\Barang');
-			$newBarang = $barangRepository -> findBy(array('ID_BARANG' => $myTransaction[$i]['IdBarang']));
+			$newBarang = $barangRepository -> findBy(array('ID_BARANG' => $myTransaction[$i]['idBarang']));
 			
 			foreach ($newBarang as $item) {
 				$barang -> setIdBarang($myTransaction[$i]['idBarang']);

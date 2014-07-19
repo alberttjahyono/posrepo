@@ -12,32 +12,23 @@ if ($parameterGet != ""){
     <p>
         <!--<div style="float:left">-->
       <!-- Previous page link -->
-      <?php if (isset($this->previous)): ?>
-     <a class="first" href="<?= $url.'/1'; ?>">&lt;&lt; first&nbsp;&nbsp;</a>
-     <a class="Previous" href="<?= $url.'/'.$this->previous.$parameterGet; ?>">&lt; prev&nbsp;&nbsp;</a>      
-      <?php else: ?>
-      <b><i>&lt;&lt; first&nbsp;&nbsp;</i></b>
-      <b><i>&lt; prev&nbsp;&nbsp;</i></b>      
-      <?php endif; ?>
+      <ul class="pagination">
+      <li><a href="<?= $url.'/1'; ?>">&laquo;</a></li>
       <?php foreach ($this->pagesInRange as $page): ?>
       <?php if ($page != $this->current): ?>
-        <a class="nopage" href="<?= $url.'/'.$page.$parameterGet; ?>">
+        <li><a class="nopage" href="<?= $url.'/'.$page.$parameterGet; ?>">
       <?= $page; ?>
-      </a>&nbsp;
+      </a></li>
       <?php else: ?>
-            <span class="nopage">
+            <li><a class="nopage" href="<?= $url.'/'.$page.$parameterGet; ?>">
       <?= $page; ?>
+      </a></li>
     </span>
-      </b>&nbsp;
+      
       <?php endif; ?>
       <?php endforeach; ?>
-      <?php if (isset($this->next)): ?>
-      <a class="next" href="<?= $url.'/'.$this->next.$parameterGet; ?>">&nbsp;next &gt;</a>
-      <a class="next" href="<?= $url.'/'.$this->pageCount.$parameterGet; ?>">&nbsp;last &gt;&gt;</a>
-      <?php else: ?>          
-       <b><i>&nbsp;next &gt;&nbsp;</i></b>
-       <b><i>&nbsp;last &gt;&gt;&nbsp;</i></b>
-      <?php endif; ?>
+      <li><a class="next" href="<?= $url.'/'.$this->pageCount.$parameterGet; ?>">&raquo;</a></li>
+      </ul>
     </p>
 </div>
 <?php endif; ?>

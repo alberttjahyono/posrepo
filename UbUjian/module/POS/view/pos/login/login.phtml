@@ -1,54 +1,49 @@
-<h1>
-	Login
-</h1>
+<div class="loginContainer">
 <?php
-$form = $this -> form;
-$form->setAttribute('action', $this->url(
-    'login/authenticate',
-    array(
-        'action' => 'authenticate',
-    )
-));
-$form -> prepare();
-echo $this->form()->openTag($form);
+	$form = $this -> form;
+	$form->setAttribute('action', $this->url(
+	    'login',
+	    array(
+	        'action' => 'login',
+	    )
+	));
+	$form -> prepare();
+	echo $this->form()->openTag($form);
 ?>
 <div id='formContainer'>
-	<div id='formUsername'>
+	<div class="row">
 		<?php
-		echo $this -> formLabel($form -> get('username'));?><BR><?php
-		echo $this -> formElement($form -> get('username'));?><BR><?php
-		echo $this -> formElementErrors($form -> get('username'));
+		  	echo $this -> formLabel($form -> get('username'));
+			echo $this -> formElement($form -> get('username'));
 		?>
-	</div>
-	<div id='formPassword'>
-		<?php
-		echo $this -> formLabel($form -> get('password'));?><BR><?php
-		echo $this -> formElement($form -> get('password'));?><BR><?php
-		echo $this -> formElementErrors($form -> get('password'));
+		<br>
+	  	<?php
+			echo $this -> formLabel($form -> get('password'));
+			echo $this -> formElement($form -> get('password'));
 		?>
+		<br>
+	  	<?php
+	  		echo $this -> formElement($form -> get('btnSubmit'));
+	  	?>
 	</div>
-	<BR>
-	<div id='formLoginSubmit'>
-		<?php
+	<?php
 		
-		echo $this -> formElement($form -> get('btnSubmit'));
-		echo $this -> formElementErrors($form -> get('btnSubmit'));
-		?>
-	</div>
-
+		if ($this -> messages) {
+			foreach ($this->messages as $message) {
+				echo "<h5 style='color:red;'>";
+				echo $message;
+				echo "<BR>";
+				echo "</h5>";
+			}
+		}
+		echo "<br>";
+		echo $this -> formElementErrors($form -> get('username'));
+		echo "<br>";
+		echo $this -> formElementErrors($form -> get('password'));
+	?>
 </div>
-<?php
-echo $this->form()->closeTag($form);
-?>
-<h3>
-<?php
-if ($this -> messages) {
-	
-	foreach ($this->messages as $message) {
-		echo $message;
-		echo "<BR>";
-	}
 
-}
+<?php
+	echo $this->form()->closeTag($form);
 ?>
-</h3>
+</div>

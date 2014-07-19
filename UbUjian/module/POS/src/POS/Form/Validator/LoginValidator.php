@@ -18,8 +18,34 @@ class LoginValidator implements InputFilterAwareInterface {
 			$inputFilter = new InputFilter();
 			$factory = new InputFactory();
 
-			$inputFilter -> add($factory -> createInput(array('name' => 'username', 'required' => 'true', 'validators' => array(), )));
-			$inputFilter -> add($factory -> createInput(array('name' => 'password', 'required' => 'true', 'validators' => array(), )));
+			$inputFilter -> add($factory -> createInput(
+			array(
+				'name' => 'username', 
+				'required' => 'true', 
+				'validators' => array(
+	                array(
+	                    'name'=>'NotEmpty',
+	                    'options'=>array(
+	                        'messages' => array('isEmpty' => 'Username Kosong !')
+	                    ),
+	                    'breakChainOnFailure'=>true
+	                ),
+				), 
+			)));
+			$inputFilter -> add($factory -> createInput(
+			array(
+				'name' => 'password', 
+				'required' => 'true', 
+				'validators' => array(
+	                array(
+	                    'name'=>'NotEmpty',
+	                    'options'=>array(
+	                        'messages' => array('isEmpty' => 'Password Kosong !')
+	                    ),
+	                    'breakChainOnFailure'=>true
+	                ),
+				), 
+			)));
 	
 			$this->inputFilter = $inputFilter;
 			return $this -> inputFilter;

@@ -15,7 +15,6 @@ class MainController extends AbstractActionController {
 
     public function mainAction(){
    		$namaUser = $this->authPlugin()->getLoginData();
-			
 		$objectManager = $this -> getServiceLocator() -> get('Doctrine\ORM\EntityManager');
         $request = $this->getRequest();
         
@@ -34,6 +33,7 @@ class MainController extends AbstractActionController {
         $query = $queryBuilder->getQuery();
 		$barang = $query->getResult();
 
+		
         $matches = $this->getEvent()->getRouteMatch();
 		$page = $matches->getParam('page', 1);
 		$paginator = new Paginator(new Collection(new ArrayCollection($barang)));

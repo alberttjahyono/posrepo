@@ -17,6 +17,7 @@ class Transaksi extends Form
             'name' => 'namaBarang', 
             'type' => 'Zend\Form\Element\Select', 
             'attributes' => array( 
+                'class' => 'inputSelect',
             ), 
             'options' => array( 
                 'label' => 'Nama Barang',
@@ -30,6 +31,7 @@ class Transaksi extends Form
             'name' => 'stok', 
             'type' => 'Zend\Form\Element\Text', 
             'attributes' => array( 
+                'class' => 'form-control',
             ), 
             'options' => array( 
                 'label' => 'Jumlah', 
@@ -41,6 +43,7 @@ class Transaksi extends Form
             'name' => 'btnSubmit',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(
+                'class' => 'btn btn-default',
                 'value' => 'Tambah'
             ),
         ));

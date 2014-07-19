@@ -34,18 +34,18 @@ class ReportController extends AbstractActionController {
 				foreach ($Barang as $myBarang) {
 					$namaBarang = $myBarang -> getNama();
 					array_push($arrayDetail, array(
-						'namaBarang' => $namaBarang, 
-						'jumlah' => $dTransaksi -> getJumlah(), 
-						'harga' => $dTransaksi -> getHarga(), 
-						'total' => $dTransaksi -> getJumlah() * $dTransaksi -> getHarga()
+						'namaBarang'=> $namaBarang, 
+						'jumlah'    => $dTransaksi -> getJumlah(), 
+						'harga'     => $dTransaksi -> getHarga(), 
+						'total'     => $dTransaksi -> getJumlah() * $dTransaksi -> getHarga()
 					));
 				}
 			}
-			$dataTransaksi = array(
-				'idTransaksi'=>$myTransaksi -> getIdTransaksi(),
+			$dataTransaksi    = array(
+				'idTransaksi' =>$myTransaksi->getIdTransaksi(),
 				'tglTransaksi'=>$myTransaksi->getTanggal(),
-				'user'=>$myTransaksi->getUser(),
-				'total'=>$myTransaksi->getTotal()
+				'user'        =>$myTransaksi->getUser(),
+				'total'       =>$myTransaksi->getTotal()
 			);
 			array_push($reportData, array('transaksiData' => $dataTransaksi, 'detailTransaksi' => $arrayDetail));
 		}

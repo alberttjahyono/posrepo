@@ -6,7 +6,7 @@ class User {
     protected $id;	
     protected $username;	
 	protected $password;
-	
+
     public function getId() {
         return $this->id;
     }
@@ -15,7 +15,6 @@ class User {
  
         return $this;
     }
-	
     public function getUsername() {
         return $this->username;
     }

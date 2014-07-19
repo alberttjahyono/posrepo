@@ -17,7 +17,7 @@ class Login extends Form
             'name' => 'username', 
             'type' => 'Zend\Form\Element\Text', 
             'attributes' => array( 
-                
+                'class' => 'form-control',
             ), 
             'options' => array( 
                 'label' => 'Username', 
@@ -28,7 +28,7 @@ class Login extends Form
             'name' => 'password', 
             'type' => 'Zend\Form\Element\Password', 
             'attributes' => array( 
-                
+                'class' => 'form-control',
             ), 
             'options' => array( 
                 'label' => 'Password', 
@@ -39,7 +39,8 @@ class Login extends Form
             'name' => 'btnSubmit',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(
-                'value' => 'Submit'
+                'class' => 'btn btn-default',
+                'value' => 'Login'
             ),
         ));
 		  

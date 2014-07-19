@@ -17,6 +17,7 @@ class UpdateBarang extends Form
             'name' => 'nama', 
             'type' => 'Zend\Form\Element\Text', 
             'attributes' => array( 
+                'class' => 'form-control',
             ), 
             'options' => array( 
                 'label' => 'Nama', 
@@ -36,6 +37,7 @@ class UpdateBarang extends Form
             'name' => 'hargaBeli', 
             'type' => 'Zend\Form\Element\Text', 
             'attributes' => array( 
+                'class' => 'form-control',
             ), 
             'options' => array( 
                 'label' => 'Harga Beli', 
@@ -46,6 +48,7 @@ class UpdateBarang extends Form
             'name' => 'hargaJual', 
             'type' => 'Zend\Form\Element\Text', 
             'attributes' => array( 
+                'class' => 'form-control',
             ), 
             'options' => array( 
                 'label' => 'Harga Jual', 
@@ -64,6 +67,7 @@ class UpdateBarang extends Form
             'name' => 'btnSubmit',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(
+                'class' => 'btn btn-default',
                 'value' => 'Submit'
             ),
         ));

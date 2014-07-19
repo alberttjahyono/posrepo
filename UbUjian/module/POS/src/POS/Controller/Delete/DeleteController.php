@@ -29,9 +29,11 @@ class DeleteController extends AbstractActionController {
 				$barang -> setHargaJual($item->getHargaJual());
 				if($item->getStatus()=="Launch"){
 					$barang -> setStatus('Standby');
+					$this -> flashmessenger() -> addMessage($item->getNama() . " sukses terstandby");
 				}
 				else{
 					$barang -> setStatus('Launch');
+					$this -> flashmessenger() -> addMessage($item->getNama() . " sukses dilaunch");
 				}
 				$objectManager -> merge($barang);
 				$objectManager -> flush();		

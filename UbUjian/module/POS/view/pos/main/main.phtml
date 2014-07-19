@@ -1,8 +1,30 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#">Home</a></li>
+  <li><a href="<?php echo $this -> url('insert', array('action' => 'insert')); ?>">New Item</a></li>
+  <li><a href="<?php echo $this -> url('transaksi', array('action' => 'transaksi')); ?>">Transaksi</a></li>
+  <li><a href="<?php echo $this -> url('report', array('action' => 'report')); ?>">Report</a></li>
+  <li><a href="<?php echo $this -> url('login/logout', array('action' => 'logout')); ?>">Logout</a></li>
+</ul>
+
+
 <h1>
 	Welcome <?php echo $namaUser;?>
 </h1>
 
-
+<?php
+if ($this -> messages) {
+	foreach ($this->messages as $message) {
+		?>
+		<div class="alert alert-success" role="alert">
+		<?php
+		echo $message;
+		echo "<BR>";
+		?>
+		</div>
+		<?php
+	}
+}
+?>
 <BR>
 <?php
 $form = $this -> form;
@@ -111,18 +133,6 @@ echo $this->form()->closeTag($form);
 <br>
 <?= ( count($paginator) > 0 ) ? $this->paginationControl($paginator, 'Sliding', 'pager.phtml', array('lang'=>$lang)) : ""; ?>
 
-<h4>
-<?php
-if ($this -> messages) {
-	
-	foreach ($this->messages as $message) {
-		echo $message;
-		echo "<BR>";
-	}
-
-}
-?>
-</h4>
 
 
 

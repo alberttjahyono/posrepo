@@ -1,9 +1,19 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li><a href="<?php echo $this -> url('home', array('action' => 'main')); ?>">Back to Main Menu</a></li>
+  <li><a href="<?php echo $this -> url('insert', array('action' => 'insert')); ?>">New Item</a></li>
+  <li><a href="<?php echo $this -> url('transaksi', array('action' => 'transaksi')); ?>">Transaksi</a></li>
+  <li class="active"><a href="<?php echo $this -> url('report', array('action' => 'report')); ?>">Report</a></li>
+  <li ><a href="<?php echo $this -> url('login/logout', array('action' => 'logout')); ?>">Logout</a></li>
+</ul>
+
+<br>
 <a href="<?php echo $this->url('report/excel', array('action'=>'excel'));?>">Export to Excel File</a>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <a href="<?php echo $this->url('report/pdf', array('action'=>'pdf'));?>">Export to PDF File</a>
 
 &nbsp;&nbsp;&nbsp;&nbsp;
 <a href="<?php echo $this->url('report/chart', array('action'=>'chart'));?>">Export to Excel with Chart</a>
+<br>
 <br>
 <?php foreach($reportData as $transaksi) : ?>
 	
@@ -79,4 +89,3 @@ if ($this -> messages) {
 ?>
 </h4>
 
-<a href="<?php echo $this -> url('home', array('action' => 'main')); ?>">Back to Main Menu</a>

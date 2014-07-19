@@ -1,6 +1,5 @@
 body{
-	background-image: linear-gradient(to bottom,#c1f0c1 50%,#46d246 100%);
-	background-repeat: repeat-x;
+
 }
 body, html {
   min-height: 100%;
@@ -8,33 +7,23 @@ body, html {
 
 
 .navbar .container .navbar-header{
-	float: right;
+	float: left;
 }
 
 
-.navbar-fixed-top{
-	background-image: linear-gradient(to bottom,#c1f0c1 0,#c1f0c1 100%);
-	background-repeat: repeat-x;
-	border-width: 0 0 2px;
-	border-color: #46d246;
-}
 
 .navbar-brand{
 	font-family: segoe-ui;
 	font-weight: lighter;
-	color:#222!important;
-}
-
-.navbar-brand:hover{
-	color:#AAAAAA!important;
 }
 
 .loginContainer{
 	position:relative;
-	float:right;
+	float:left;
+	margin: 0 auto;
 	width:200px;
 	height:75px;
-	text-align: right;
+	text-align: middle;
 }
 
 .loginContainer label,.loginContainer input{
